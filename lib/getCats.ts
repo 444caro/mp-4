@@ -1,8 +1,8 @@
 "use server";
-import { Cat } from "@/types";
+import { Cat, CatApiResponse } from "@/types";
 
 
-function mapCatData(cat: Record<string, any>): Cat {
+function mapCatData(cat: CatApiResponse): Cat {
     return {
         id: cat.id,
         image: cat.url,
@@ -33,8 +33,7 @@ export default async function getCats(): Promise<Cat[]> {
       if (!res.ok) {
         throw new Error("Failed to fetch cats");
       }
-  
-      const data = await res.json();
+      const data: CatApiResponse[] = await res.json();
       const mapped = data.map(mapCatData).filter((cat: Cat) => cat.breed !== "Unknown");
       catsWithBreeds = [...catsWithBreeds, ...mapped];
     }

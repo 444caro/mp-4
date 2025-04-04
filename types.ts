@@ -4,3 +4,12 @@ export type Cat = {
     breed: string;
     temperament: string;
 }
+
+export type CatApiResponse = {
+    id: string;
+    url: string;
+    breeds: {
+      name: string;
+      temperament: string;
+    }[];
+};
